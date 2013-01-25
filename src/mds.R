@@ -36,12 +36,12 @@ computeMDS <- function(fastaList) {
   list(points=points,xlim=c(xmin:xmax),ylim=c(ymin:ymax))
 }
 
-plotMDS <- function(mds,cexmain=2,offset=0.5,circleBorder="gray") {
+plotMDS <- function(mds,cexmain=2,offset=0.5,circleBorder="gray",mar=c(0,0,4,0),cex=1) {
   require(RColorBrewer)
   require(plotrix)
   pm_old <- par()$mar
   
-  par(mar=c(0,0,4,0))
+  par(mar=mar)
   for(i in 1:length(mds$points)) {
     sizes <- mds$points[[i]]$freq
     pg_max <- ceiling(max(sizes)*100)

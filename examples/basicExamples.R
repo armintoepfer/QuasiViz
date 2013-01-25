@@ -3,7 +3,6 @@ setwd("~/Dropbox/QuasiAsterisk/QuasiViz/")
 require("R.utils")
 sourceDirectory("src/")
 
-#readFasta("~/Dropbox/Projects/Martin/int/20130117/ALL/08-16621.fasta")
 dir <- readDirectory("data/")
 
 plotEntropy(dir,legendPosition="bottom")
@@ -16,7 +15,12 @@ par(mfrow=c(1,1))
 plotMDS(mds)
 dev.off()
 
-pdf("mds.pdf",40,30)
-par(mfrow=c(3,4))
-plotMDS(mds,offset=1,circleBorder="black")
+pdf("mds.pdf",30,40)
+par(mfrow=c(4,3))
+plotMDS(mds,offset=1,circleBorder=rgb(0,0,0,alpha=.2),cexmain=3,mar=c(0,0,3,0))
+dev.off()
+
+pdf("mds.pdf",30,40)
+par(mfrow=c(4,3))
+plotMDS(mds,offset=1,circleBorder=NULL,cexmain=3,mar=c(0,0,3,0),cex=1)
 dev.off()
