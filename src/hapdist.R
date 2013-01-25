@@ -1,9 +1,9 @@
 plotHapDist <- function(fastaList,cex = 3, lwd=3) {
-  par(mar=c(5,6,0,1))
+  par(mar=c(5,6,4,1))
   l <- length(fastaList)
   xmax <- max(sapply(fastaList,function(x) length(x$frequencyDistribution)))
   
-  plot(1,1,type="n",log="yx",main="",cex.axis=cex,xaxt="n",cex.main=2,axes=F,xlim=c(1,xmax),yaxt="n",ylim=c(1e-3,1),xlab="",ylab="")
+  plot(1,1,type="n",log="yx",cex.axis=cex,xaxt="n",cex.main=2,axes=F,xlim=c(1,xmax),yaxt="n",ylim=c(1e-3,1),xlab="",ylab="",main="Haplotype distributions")
   mtext(side=2,text="Frequency",cex=2,padj=-3.5)
   mtext(side=1,text="Haplotypes",cex=2,padj=3)
   axis(2, at=c(1e-3,1e-2,1e-1,1), labels=c(expression(10^-3),expression(10^-2),expression(10^-1),1), lwd.ticks=1,cex.axis=1.5)
