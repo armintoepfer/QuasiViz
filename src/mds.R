@@ -36,15 +36,35 @@ computeMDS <- function(fastaList) {
   list(points=points,xlim=c(xmin:xmax),ylim=c(ymin:ymax))
 }
 
-plotMDS <- function(mds,cexmain=2,offset=0.5,circleBorder="gray",mar=c(0,0,4,0),cex=1) {
+plotMDSsingle <- function(mds,index=1,cexmain=2,offset=0.5,circleBorder="gray",mar=c(0,0,4,10)) {
   require(RColorBrewer)
   require(plotrix)
-  pm_old <- par()$mar
+  
+  par(mar=mar)
+  par(mar=c(0,0,4,0))
+  layout(matrix(c(1,2),1,2,byrow=TRUE),width=c(1.2,.1))
+  i <- index
+  sizes <- mds$points[[i]]$freq
+  pg <- ceiling(sizes*100)
+  ccc <- rainbow(pg,alpha=.4,start = 0, end = 1)
+  colors <- ccc[pg]
+  symbols(mds$points[[i]]$x,mds$points[[i]]$y,
+          xlim=c(min(mds$xlim)-offset,max(mds$xlim)+offset),ylim=c(min(mds$ylim)-offset,max(mds$ylim)+offset),
+          circles=sizes,bg=colors,fg=circleBorder,
+          main=paste("MDS",mds$points[[i]]$name),
+          xlab="",ylab="",xaxt="n",yaxt="n",
+          cex.main=cexmain)
+  plot(0,0,type="n",axes=F,ylab="",xlab="",ylim=c(0,1),xlim=c(0,1))
+  colorlegend(rainbow(pg,start = 0, end = 1),ylim=c(0,1),xlim=c(0,1),label=c(1e-4,1e-3,1e-2,1))
+}
+
+plotMDS <- function(mds,cexmain=2,offset=0.5,circleBorder="gray",mar=c(0,0,4,0)) {
+  require(RColorBrewer)
+  require(plotrix)
   
   par(mar=mar)
   for(i in 1:length(mds$points)) {
     sizes <- mds$points[[i]]$freq
-    pg_max <- ceiling(max(sizes)*100)
     pg <- ceiling(sizes*100)
     ccc <- rainbow(pg,alpha=.4,start = 0, end = 1)
     colors <- ccc[pg]

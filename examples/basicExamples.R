@@ -12,7 +12,7 @@ mds <- computeMDS(dir)
 
 pdf("mds.pdf",20,20)
 par(mfrow=c(1,1))
-plotMDS(mds)
+plotMDSsingle(mds,7)
 dev.off()
 
 pdf("mds.pdf",30,40)
