@@ -1,15 +1,13 @@
-fastaList <- dir
-
 computeMDS <- function(fastaList) {
   require(Rlof)
   require(mgcv)
   
-  A <- matrix(0,0,1,ncol=ncol(fastaList[[1]]$sequences))
+  A <- matrix(0,0,1,ncol=ncol(fastaList[[1]]$sequenceMatrix))
   l <- length(fastaList)
   hapSizes <- c()
   for (i in 1:l) {
-    A <- rbind(A,fastaList[[i]]$sequences)
-    hapSizes <- c(hapSizes,nrow(fastaList[[i]]$sequences))
+    A <- rbind(A,fastaList[[i]]$sequenceMatrix)
+    hapSizes <- c(hapSizes,nrow(fastaList[[i]]$sequenceMatrix))
   }
   Au <- uniquecombs(A)
   ind <- attr(Au,"index")

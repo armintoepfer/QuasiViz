@@ -13,10 +13,12 @@ readFasta <- function(input) {
   f <- vector(length=ceiling(length(q)/2))
   s <- vector(length=ceiling(length(q)/2))
   y <- vector(length=ceiling(length(q)/2))
+  l <- vector(length=length(q)/2)
   
   for (i in 1:length(q)) {
     if (i %% 2 == 0) {
       s <- unlist(strsplit(toupper(q[i]),""))
+      l[i/2] <- toupper(q[i])
       for (j in 1:nchar(q[i])) {
         if (s[j] == "A") {
           d[i/2,j] <- 0
@@ -54,7 +56,8 @@ readFasta <- function(input) {
   entropyP.mean <- mean(entropyP)
   entropyP.sd <- sd(entropyP)
   name <- unlist(strsplit(unlist(strsplit(input,"/"))[length(unlist(strsplit(input,"/")))],'\\.'))[1]
-  list(sequences=d,
+  list(sequences=l,
+       sequenceMatrix=d,
        frequencyDistribution=p,
        quasispeciesEntropy=list(data=entropyP,mean=entropyP.mean,sd=entropyP.sd),
        fitnessDistribution=f,
